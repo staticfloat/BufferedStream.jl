@@ -1,6 +1,6 @@
 # BufferedStream
 
-[![Build Status](https://travis-ci.org/staticfloat/BufferedStream.jl.svg?branch=master)](https://travis-ci.org/staticfloat/BufferedStream.jl)
+[![Build Status](https://travis-ci.org/staticfloat/BufferedStream.jl.svg?branch=master)](https://travis-ci.org/staticfloat/BufferedStream.jl) [![Coverage Status](https://coveralls.io/repos/staticfloat/BufferedStream.jl/badge.svg?branch=master&service=github)](https://coveralls.io/github/staticfloat/BufferedStream.jl?branch=master)
 
 This module provides a basic datatype used to buffer incoming stream data in an a format friendly to processing.  The basic API is to create a `LinkedBufferStream` (hinting at the fact that it is implemented using a linked list) and then create `views` on that stream:
 
