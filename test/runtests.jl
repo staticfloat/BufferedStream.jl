@@ -19,10 +19,12 @@ push!(stream, data)
 @test view.chunk.next.value == stream.latest
 @test isnull(stream.latest.next)
 
-# Print out a StreamChunk and a StreamView to see what it looks like:
+# Print then out to see what they look like:
 display(stream)
 println()
 display(view)
+println()
+display(view.chunk)
 println()
 
 # Ensure that the data came through okay, and that out of bounds accesses are recognized as such
@@ -33,6 +35,7 @@ end
 @test_throws BoundsError view[-1]
 @test_throws BoundsError view[0]
 @test_throws BoundsError view[6]
+@test_throws DomainError shift_origin!(view, -1)
 
 # Verify that the LinkedStream does not copy data:
 data[1] = 3.2
