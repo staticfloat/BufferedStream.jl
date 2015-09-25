@@ -1,5 +1,7 @@
 # BufferedStream
 
+[![Build Status](https://travis-ci.org/staticfloat/BufferedStream.jl.svg?branch=master)](https://travis-ci.org/staticfloat/BufferedStream.jl)
+
 This module provides a basic datatype used to buffer incoming stream data in an a format friendly to processing.  The basic API is to create a `LinkedBufferStream` (hinting at the fact that it is implemented using a linked list) and then create `views` on that stream:
 
 ```julia
@@ -56,5 +58,3 @@ view[1] == 2
 * Samples in the past relative to all views are unreachable and garbage collectable immediately.  Do not advance views beyond samples you wish to process in the future.
 
 * `view` objects do not define a `setindex!()` method; assignments do not work, partially due to the fact that the chunks underlying the views would be mutated, and partially because the spirit of this package is to provide a read-only view of the incoming stream; processing that requires modifications of the data should create a copy of the data and operate upon that.
-
-[![Build Status](https://travis-ci.org/staticfloat/BufferedStream.jl.svg?branch=master)](https://travis-ci.org/staticfloat/BufferedStream.jl)
