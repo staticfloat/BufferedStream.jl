@@ -106,7 +106,7 @@ StreamView{T}(v::StreamView{T}) = StreamView{T}(v.chunk, v.sample_offset, v.abs_
 # Move this view forward `offset` samples; we only support positive offsets!
 function shift_origin!(view::StreamView, offset::Integer)
     if offset < 0
-        throw(DomainError("Only positive shifts allowed!"))
+        throw(DomainError())
     end
 
     # Bump up the absolute index immediately
