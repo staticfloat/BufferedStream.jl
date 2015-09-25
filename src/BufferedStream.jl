@@ -1,3 +1,4 @@
+__precompile__()
 module BufferedStream
 
 import Base: getindex, length, push!, eltype, linearindexing, size, similar, show
@@ -71,11 +72,6 @@ type StreamView{T} <: DenseArray{T, 1}
     abs_idx::Int64
 end
 
-# Show something well-behaved
-#function show(io::IO, view::StreamView)
-#    Base.show_vector(io, view, "StreamView[", "]")
-#end
-
 # Define stuff for AbstractArray
 linearindexing(::StreamView) = Base.LinearFast()
 # Calculates how many samples after our origin there are buffered up
@@ -99,10 +95,9 @@ eltype{T}(view::StreamView{T}) = T
 
 
 # Construct a new view off of a stream, with an optional offset
-function StreamView{T}(stream::LinkedStream{T}, offset::Int64 = 0)
-    view = StreamView{T}(stream.latest, 0, stream.samples_past)
-    shift_origin!(view, offset)
-    return view
+function StreamView{T}(stream::LinkedStream{T})
+    offset = length(stream.latest)
+    return StreamView{T}(stream.latest, offset, stream.samples_past + offset)
 end
 
 # Construct a new view off of another view (easy peasey; just a straight copy)

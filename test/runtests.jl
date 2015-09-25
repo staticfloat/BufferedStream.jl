@@ -85,7 +85,7 @@ view2 = StreamView(view)
 view3 = StreamView(stream)
 
 # Test to make sure that the linked list looks like we'd expect
-@test view3.sample_offset == 0
+@test view3.sample_offset == 100
 @test view2.sample_offset == view.sample_offset
 @test view2.chunk == view.chunk
 @test view2.chunk.next.value.next.value == view3.chunk
@@ -93,6 +93,6 @@ view3 = StreamView(stream)
 
 # Test to make sure the values look like we'd expect
 @test view2.abs_idx == view.abs_idx
-@test view3.abs_idx == view.abs_idx + 48 + 99
+@test view3.abs_idx == view.abs_idx + 247
 @test view2[1] == view[1]
-@test view3[1] == view[148]
+@test_throws BoundsError view3[1]
